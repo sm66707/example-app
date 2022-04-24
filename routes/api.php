@@ -21,24 +21,11 @@ use Illuminate\Validation\ValidationException;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('posts',[PostController::class,'index'])->middleware('auth:sanctum');
-Route::get('posts/{post}',[PostController::class,'show']);
-Route::post('posts',[PostController::class,'store']);
-Route::post('/sanctum/token', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        'device_name' => 'required',
-    ]);
- 
-    $user = User::where('email', $request->email)->first();
- 
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
- 
-    return $user->createToken($request->device_name)->plainTextToken;
+Route::group(['middleware'=>'auth:sanctum'],function(){
+    Route::post('posts',[PostController::class,'store'])->name('posts.post');
+    Route::delete('posts/{id}',[PostController::class,'delete'])->name('posts.post');
+    Route::put('posts/{id}',[PostController::class,'update']);
+    Route::get('posts',[PostController::class,'index'])->name('all.posts');
+    Route::get('posts/{id}',[PostController::class,'show'])->name('posts.post');
 });
-
+Route::post('/sanctum/token',[AuthenticationController::class,'authenticate']);
