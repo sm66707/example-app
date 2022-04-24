@@ -4,7 +4,16 @@
 
 
 @section('content')
-<form method="POST" action="{{ route('posts.update',['post'=> $posts->id]) }}">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form method="POST" action="{{ route('posts.update',['post'=> $posts->id]) }}" enctype="multipart/form-data"> 
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -25,8 +34,16 @@
                 </select>
             </div>
 
-
-
+            <div>
+            <label class="form-label" for="customFile @error('fileUpload') is-invalid @enderror">Upload File</label>
+            <input type="file" name="fileUpload" class="form-control" id="customFile" />
+            </div>
+            @error('fileUpload')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+            <input type="hidden" name="post_id"  value="{{ $posts->id }}" />
+            
           <button class="btn btn-success" >Update</button>
         </form>
 @endsection

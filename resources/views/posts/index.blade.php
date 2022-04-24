@@ -14,9 +14,12 @@ use Carbon\Carbon;
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
-                <th scope="col">Posted By</th>
+                <th scope="col">Posted By </th>
                 <th scope="col">Created At</th>
                 <th scope="col">Actions</th>
+                <th scope="col">Slug</th>
+                <!-- <th scope="col">Image</th> -->
+                
               </tr>
             </thead>
             <tbody>
@@ -26,12 +29,11 @@ use Carbon\Carbon;
                 <td>{{ $post['id'] }}</th>
                 <td>{{ $post['title'] }}</td>
                 @if($post->user)
-                <td>{{ $post->user->name }}</td>
+                <td>{{ $post->user->name}}</td>
                 @elseif($post->user==' ')
                 <td>Not found</td>
                 @endif
                 <td>{{Carbon::parse($post->created_at)->toDayDateTimeString()}}</td>
-                
                 <td>
                     <a href="{{ route('posts.show', ['post' => $post['id']]) }}" class="btn btn-info">View</a>
                     <a href="{{route('posts.edit',['post' => $post['id']])}}" class="btn btn-primary">Edit</a>
@@ -43,6 +45,8 @@ use Carbon\Carbon;
                       </form>
                    
                 </td>
+                <td>{{ $post['slug'] }}</td>
+                <!-- <td><img src="{{ asset('storage/images/'.$post->image) }}" style="width:50px;height:50px;"/></td> -->
               </tr>
               @endforeach
 
