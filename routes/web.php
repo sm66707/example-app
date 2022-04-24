@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Auth\SocialMediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,7 @@ Route::put('/posts/{post}',[PostController::class,'update'])->name('posts.update
 Route::DELETE('/posts/{post}',[PostController::class,'destroy'])->name('posts.destroy')->middleware('auth');
 Route::post('/comments',[CommentController::class , 'store'])->name('comments.store')->middleware('auth');
 Auth::routes();
+Route::get('social-auth/{provider}/callback',[SocialMediaController::class,'providerCallback']);
+Route::get('social-auth/{provider}',[SocialMediaController::class,'redirectToProvider'])->name('social.redirect');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

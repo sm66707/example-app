@@ -1,4 +1,4 @@
- <?php
+<?php
 
 namespace App\Http\Controllers\Auth;
 
@@ -24,14 +24,14 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /**
+    /*
      * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
+    /*
      * Create a new controller instance.
      *
      * @return void
@@ -41,7 +41,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
+    /*
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -56,7 +56,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
+    /*
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data

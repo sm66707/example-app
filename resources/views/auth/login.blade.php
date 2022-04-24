@@ -56,6 +56,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <div class="row mb-0" style=" margin-top: 10px;margin-left: 70px;">
+                                <a href="{{ route('social.redirect','github') }}" class="btn btn-dark" style="border-radius: 20px;margin: 10px;"> <i class="fab fa-github"></i> login with Github </a>
+                                <a href="{{ route('social.redirect','facebook') }}" class="btn btn-primary" style="border-radius: 20px;margin: 10px;"> <i class="fab fa-facebook"></i> login with Facebook </a>
+                               
+                            </div>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">

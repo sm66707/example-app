@@ -15,7 +15,7 @@ class AddSlugToPostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-            $table->string('slug');
+            $table->string('slug')->nullable();
         });
     }
 
